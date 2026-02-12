@@ -7,11 +7,17 @@ export const API_BASE =
   "https://doctor-scheduling-system-production-fb40.up.railway.app";
 
 
+// const client = axios.create({
+//   baseURL: API_BASE,
+//   headers: { "Content-Type": "application/json" },
+//   withCredentials: true
+// });
 const client = axios.create({
-  baseURL: API_BASE,
+  baseURL: `${API_BASE}/api`, // now all requests are relative to /api
   headers: { "Content-Type": "application/json" },
-  withCredentials: true
+  withCredentials: true,
 });
+
 
 function buildError(err) {
   if (err?.response?.data?.error) return new Error(err.response.data.error);

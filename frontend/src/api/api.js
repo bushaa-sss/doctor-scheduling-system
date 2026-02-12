@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const API_BASE =
   process.env.REACT_APP_API_BASE ||
-  "https://doctor-scheduling-system-production-fb40.up.railway.app/";
+  "https://doctor-scheduling-system-production-fb40.up.railway.app";
 
 
 const client = axios.create({

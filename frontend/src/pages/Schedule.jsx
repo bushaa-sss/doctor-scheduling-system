@@ -97,20 +97,30 @@ export default function Schedule() {
       }
 
       const origin = new URL(API_BASE.replace(/\/api$/, "")).origin;
+      let settled = false;
       const timeout = setTimeout(() => {
         cleanup();
         reject(new Error("Login timed out. Please try again."));
       }, 120000);
 
-      // const poll = setInterval(() => {
-      //   if (popup.closed) {
-      //     cleanup();
-      //     reject(new Error("Login cancelled."));
-      //   }
-      // }, 500);
+      // COOP on Google pages blocks reading popup.closed; use status polling instead.
+      const statusPoll = setInterval(async () => {
+        try {
+          const status = await api.getGmailStatus();
+          if (status?.authenticated) {
+            setGmailStatus(status);
+            cleanup();
+            resolve(true);
+          }
+        } catch {
+          // Ignore transient errors while user is authenticating.
+        }
+      }, 1500);
 
       function cleanup() {
-        clearInterval(poll);
+        if (settled) return;
+        settled = true;
+        clearInterval(statusPoll);
         clearTimeout(timeout);
         window.removeEventListener("message", onMessage);
       }

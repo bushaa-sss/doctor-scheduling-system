@@ -2,7 +2,10 @@ import axiosModule from "axios/dist/browser/axios.cjs";
 import axios from "axios";
 // const axios = axiosModule?.default || axiosModule;
 
-export const API_BASE = process.env.REACT_APP_API_BASE || "http://localhost:5000/api";
+export const API_BASE =
+  process.env.REACT_APP_API_BASE ||
+  "https://doctor-scheduling-system-production-2289.up.railway.app/api";
+
 
 const client = axios.create({
   baseURL: API_BASE,

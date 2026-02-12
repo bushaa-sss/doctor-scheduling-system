@@ -9,10 +9,10 @@ function configureVapid() {
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   const subject = process.env.VAPID_SUBJECT || "mailto:admin@example.com";
 
-  // if (!publicKey || !privateKey) {
-  //   console.warn("VAPID keys missing. Push notifications disabled.");
-  //   return;
-  // }
+  if (!publicKey || !privateKey) {
+    console.warn("VAPID keys missing. Push notifications disabled.");
+    return;
+  }
 
   webpush.setVapidDetails(subject, publicKey, privateKey);
   isConfigured = true;

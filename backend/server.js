@@ -14,7 +14,8 @@ const authRoutes = require("./routes/authRoutes");
 const emailRoutes = require("./routes/emailRoutes");
 
 const app = express();
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://doctor-scheduling-system-pied.vercel.app";
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+console.log("CORS allowed origin:", FRONTEND_URL);  // 👈 Add it here
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(express.json());
 if (process.env.NODE_ENV === "production") {

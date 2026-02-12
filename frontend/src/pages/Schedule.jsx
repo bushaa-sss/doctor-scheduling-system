@@ -102,12 +102,12 @@ export default function Schedule() {
         reject(new Error("Login timed out. Please try again."));
       }, 120000);
 
-      const poll = setInterval(() => {
-        if (popup.closed) {
-          cleanup();
-          reject(new Error("Login cancelled."));
-        }
-      }, 500);
+      // const poll = setInterval(() => {
+      //   if (popup.closed) {
+      //     cleanup();
+      //     reject(new Error("Login cancelled."));
+      //   }
+      // }, 500);
 
       function cleanup() {
         clearInterval(poll);
